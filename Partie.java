@@ -95,6 +95,7 @@ public class Partie {
         while (this.getTabjoueur().get(i).isTour() == false){
             i += 1;
         }
+        System.out.println("C'est le tour du joueur "+ this.getTabjoueur().get(i).getNom());
         this.getTabjoueur().get(i).commencerTour();
     }
 
