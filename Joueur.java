@@ -11,6 +11,7 @@ public class Joueur {
     public Joueur(int refJoueur) { //constructeur de Joueur
         this.refJoueur=refJoueur;
         this.carteJoueurMain=new ArrayList<CarteRumeur>();
+        this.carteJoueurPlateau=new ArrayList<CarteRumeur>();
     }
 
     public Role getIdentite() {
@@ -137,8 +138,8 @@ public class Joueur {
     }
 
     public void jouerCarte(CarteRumeur carteRumeur){
-        this.carteJoueurMain.remove(carteRumeur);
         this.carteJoueurPlateau.add(carteRumeur);
+        this.carteJoueurMain.remove(carteRumeur);
         if (this.estAccuse == true){
             this.effetWitch(carteRumeur);
             this.estAccuse = false;
@@ -370,7 +371,7 @@ public class Joueur {
 
         if (this.estAccuse==true) {
 
-            this.tour=true;
+            System.out.println("Joueur "+getNom());
 
             if(carteJoueurMain.size()==0){
                 this.revelerId();
@@ -391,19 +392,21 @@ public class Joueur {
                     this.revelerId();
                 }
                 else if(action=='W'){
-                    Scanner inputCarteR=new Scanner(System.in);
-                    System.out.println("Quelle carte voulez vous jouer ? : Veuillez saisir le nom de la carte");
-                    String nomCarteR=inputCarteR.nextLine();
-                    int j=0;
-                    while(this.carteJoueurMain.get(j).getNomCarte().equals(nomCarteR)==false){ //tant qu'on ne trouve pas le nom de la carte saisie, on incrémente j
-                        j++;
-                        if(j>carteJoueurMain.size()){ //condition d'erreur
-                            System.out.println("Erreur, veuillez ressasir le nom de la carte");
-                            nomCarteR=inputCarteR.nextLine();
-                            j=0;
-                        }
+                    System.out.println("Ce sont vos cartes ");
+                    for( int i = 0; i< this.carteJoueurMain.size(); i++){
+                        System.out.println(this.carteJoueurMain.get(i).getNomCarte());
                     }
-                    this.jouerCarte(carteJoueurMain.get(j));
+                    Scanner inputCarteR=new Scanner(System.in);
+                    System.out.println("Quelle carte voulez vous jouer ? : Veuillez saisir le numéro de la carte");
+                    int numCarteR=inputCarteR.nextInt();
+                    while(numCarteR>carteJoueurMain.size()){ //tant qu'on ne trouve pas le nom de la carte saisie, on incrémente j
+                        System.out.println("Erreur, veuillez ressasir le nom de la carte");
+                        numCarteR=inputCarteR.nextInt();
+
+                        }
+                    this.jouerCarte(carteJoueurMain.get(numCarteR));
+                    }
+
                 }
             }
 
@@ -412,7 +415,6 @@ public class Joueur {
 
 
         }
-    }
 
     public void commencerTour(){
 
