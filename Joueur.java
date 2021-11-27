@@ -127,12 +127,14 @@ public class Joueur {
 
     public boolean revelerId(){
         if(this.getIdentite().equals(Role.Witch)){
+            System.out.println("Le joueur "+ getNom() + "est une WITCH");
             Partie.getInstance().getTabjoueurSup().add(this);
             Partie.getInstance().getTabjoueur().remove(this);
             return true;
         }
         else{
             this.idEstRevele = true;
+            System.out.println("Le joueur "+ getNom() + "est un Villageois");
             return false;
         }
     }
@@ -142,10 +144,12 @@ public class Joueur {
         this.carteJoueurMain.remove(carteRumeur);
         if (this.estAccuse == true){
             this.effetWitch(carteRumeur);
+            System.out.println("Le joueur "+getNom()+"a utilisé l'effet Witch de la carte "+carteRumeur.getNomCarte());
             this.estAccuse = false;
         }
         else{
             this.efffetHunt(carteRumeur);
+            System.out.println("Le joueur "+getNom()+"a utilisé l'effet Hunt de la carte "+carteRumeur.getNomCarte());
         }
     }
 
@@ -375,7 +379,6 @@ public class Joueur {
 
             if(carteJoueurMain.size()==0){
                 this.revelerId();
-
             }
             else{
                 Scanner inputAction=new Scanner(System.in); //création d'un objet de type scanner pour récupérer les inputs de l'utilisateur
