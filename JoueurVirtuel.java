@@ -8,6 +8,27 @@ public class JoueurVirtuel extends Joueur implements Strategie  {
         this.estVirtuel=true;
     }
 
+    public void accuserVirtuel(){
+        this.setAccuse(true);
+        int numJoueur = (int) (Math.random() * Partie.getInstance().getTabjoueur().size());
+        String nomJoueur = Partie.getInstance().getTabjoueur().get(numJoueur).getNom();
+        Joueur joueurAccuse = Partie.getInstance().chercherJoueur(nomJoueur);
+        while (joueurAccuse.isIdEstRevele() == true) {
+            System.out.println("Ce joueur a deja révélé son identité.");
+            joueurAccuse = this.choisirJoueur();
+        }
+
+        joueurAccuse.setEstAccuse(true);
+        while (this.Accuse()) {
+            joueurAccuse.repondreAccusation();
+            this.setAccuse(false);
+        }
+
+        if (joueurAccuse.getIdentite().equals(Role.Witch)) {
+            this.setPoints(this.getPoints() + 1);
+        }
+    }
+
     public void aggressif(){
         if(this.estVirtuel) {
             while (tour == true) {
@@ -32,14 +53,22 @@ public class JoueurVirtuel extends Joueur implements Strategie  {
         }
     }
 
-    public void commencerTour(){
+    public void commencerTourVirtuel(){
         if (carteJoueurMain.size() == 0) {
-            this.accuser();
+            this.accuserVirtuel();
         } else if (this.isEvilEye() == true) {
             System.out.println("Le joueur virtuel " +this.getNom()+" accuse un autre joueur.");
             this.aggressif();
         }
-
+        else{
+            int choixStrat = (int)(Math.random()*1);
+            if(choixStrat==1){
+                this.aggressif();
+            }
+            else{
+                this.strategique();
+            }
+        }
     }
 
 }
