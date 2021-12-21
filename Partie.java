@@ -205,7 +205,7 @@ public class Partie {
             //Etape pour ajouter des joueurs réels
             Scanner inputNbJR = new Scanner(System.in);
             System.out.println("Nombre de joueurs réels");
-             nbJoueurR = inputNbJR.nextInt();
+            nbJoueurR = inputNbJR.nextInt();
 
 
             for (int i = 0; i < nbJoueurR; i++) {
@@ -221,7 +221,7 @@ public class Partie {
             //Etape pour ajouter des joueurs virtuels
             Scanner inputNbJV = new Scanner(System.in);
             System.out.println("Nombre de joueurs virtuels");
-             nbJoueurV = inputNbJV.nextInt();
+            nbJoueurV = inputNbJV.nextInt();
 
             int joueurRestant = 6 - nbJoueurR;
 

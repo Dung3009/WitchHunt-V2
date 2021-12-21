@@ -10,7 +10,7 @@ public class JeuCarte {
         deckCarteRumeurs = new LinkedList<CarteRumeur>();
         NomCarte[] nomCartes = NomCarte.values();
         for (int i = 0; i < nomCartes.length; i++){
-            CarteRumeur carteRumeur = new CarteRumeur(nomCartes[i]);
+            CarteRumeur carteRumeur = new CarteRumeur(nomCartes[i],i);
             deckCarteRumeurs.add(carteRumeur);
         }
 
